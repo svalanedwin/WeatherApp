@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleProp, ViewStyle, StyleSheet } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
 
 interface ContainerProps {
@@ -15,10 +15,8 @@ const Container: React.FC<ContainerProps> = ({ children, style, testID }) => {
     <View
       testID={testID}
       style={[
-        {
-          flex: 1,
-          backgroundColor: theme.colors.background,
-        },
+        styles.container,
+        { backgroundColor: theme.colors.background },
         style,
       ]}
     >
@@ -26,5 +24,11 @@ const Container: React.FC<ContainerProps> = ({ children, style, testID }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default React.memo(Container);

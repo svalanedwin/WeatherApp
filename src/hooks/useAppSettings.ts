@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleDarkMode, setDarkMode } from '../redux/slices/appSettingsSlice';
+import { setDarkMode } from '../redux/slices/appSettingsSlice';
 import { storageService } from '../services/storage/asyncStorage';
 
 export const useAppSettings = () => {

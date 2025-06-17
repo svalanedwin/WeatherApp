@@ -23,8 +23,8 @@ export const useWeather = () => {
       if (city) {
         dispatch(setLastSearchedCity(city));
       }
-    } catch (error) {
-      console.error('Failed to load last city:', error);
+    } catch (err) {
+      console.error('Failed to load last city:', err);
     }
   }, [dispatch]);
 
@@ -37,11 +37,11 @@ export const useWeather = () => {
       
       try {
         await storageService.setLastSearchedCity(city);
-      } catch (storageError) {
-        console.error('Failed to save city:', storageError);
+      } catch (storageErr) {
+        console.error('Failed to save city:', storageErr);
       }
-    } catch (apiError) {
-      const errorMessage = apiError instanceof Error ? apiError.message : 'Failed to fetch weather';
+    } catch (apiErr) {
+      const errorMessage = apiErr instanceof Error ? apiErr.message : 'Failed to fetch weather';
       dispatch(fetchWeatherFailure(errorMessage));
     }
   }, [dispatch]);
