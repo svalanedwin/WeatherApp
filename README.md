@@ -53,38 +53,40 @@ src/
    git clone https://github.com/svalanedwin/WeatherApp.git
    cd weather-app
 
-2. Install dependencies:
+3. Install dependencies:
       ```bash
      yarn install
 
-3. Create .env file in root directory:
+4. Create .env file in root directory:
     ```env
      OPEN_WEATHER_API_KEY=your_api_key_here
 
 ## Running the App
 
-Android
+1. Android
+
    ```bash
    yarn android
 
-iOS
+2. iOS
+
    ```bash
    yarn ios
 
 ## Testing
 
-Run unit tests:
+1. Run unit tests:
 
     ```bash
     yarn test
 
-Run tests with coverage:
+2. Run tests with coverage:
 
     ```bash
     yarn test:coverage
 
 ## Architectural Decisions
-  Architectural Decisions
+
 1. State Management:
     Used Redux Toolkit for centralized state management with:
     * Weather data state
@@ -112,8 +114,6 @@ Run tests with coverage:
     * Type-safe routes
     * Theme integration
     * Native stack navigation
-
-
 
 Future Improvements
 * Add 5-day forecast
