@@ -2,12 +2,19 @@ import React from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
 
-const LoadingIndicator: React.FC = () => {
-  const theme = useTheme();
+interface LoadingIndicatorProps {
+  darkMode?: boolean;
+}
+
+const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({ darkMode = false }) => {
+  const { colors } = useTheme();
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <ActivityIndicator 
+        size="large" 
+        color={darkMode ? colors.secondary : colors.primary} 
+      />
     </View>
   );
 };

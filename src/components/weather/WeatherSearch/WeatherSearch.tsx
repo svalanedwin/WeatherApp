@@ -13,7 +13,7 @@ interface WeatherSearchProps {
 const WeatherSearch: React.FC<WeatherSearchProps> = ({ 
   onSearch, 
   loading,
-  initialCity = '' 
+  initialCity = ''
 }) => {
   const [city, setCity] = useState(initialCity);
   const theme = useTheme();
@@ -29,12 +29,13 @@ const WeatherSearch: React.FC<WeatherSearchProps> = ({
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View style={[styles.container, { backgroundColor: theme.colors.inputBackground }]}>
       <Input
         value={city}
         onChangeText={setCity}
         placeholder="Enter city name"
-        onEndEditing={handleSearch}  // Changed from onSubmitEditing to onEndEditing
+        placeholderTextColor={theme.colors.textSecondary}
+        onEndEditing={handleSearch}
         returnKeyType="search"
       />
       <Button

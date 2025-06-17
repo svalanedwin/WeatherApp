@@ -5,13 +5,15 @@ import { useTheme } from '../../../context/ThemeContext';
 interface ContainerProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  testID?: string;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, style }) => {
-  const theme = useTheme();
+const Container: React.FC<ContainerProps> = ({ children, style, testID }) => {
+  const { theme } = useTheme();
 
   return (
     <View
+      testID={testID}
       style={[
         {
           flex: 1,
@@ -25,4 +27,4 @@ const Container: React.FC<ContainerProps> = ({ children, style }) => {
   );
 };
 
-export default Container;
+export default React.memo(Container);

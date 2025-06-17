@@ -1,11 +1,11 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 import { useWeather } from '../../hooks/useWeather';
+import { useTheme } from '../../context/ThemeContext';
 import WeatherCard from '../../components/weather/WeatherCard/WeatherCard';
 import WeatherSearch from '../../components/weather/WeatherSearch/WeatherSearch';
 import LoadingIndicator from '../../components/common/LoadingIndicator/LoadingIndicator';
 import Container from '../../components/layout/Container/Container';
-import styles from '../../styles/components/HomeScreen.styles';
 
 const HomeScreen: React.FC = () => {
   const {
@@ -16,10 +16,15 @@ const HomeScreen: React.FC = () => {
     fetchWeather,
   } = useWeather();
 
+  const { theme } = useTheme();
+
   return (
     <Container>
       <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
+        contentContainerStyle={[
+          styles.scrollViewContent,
+          { backgroundColor: theme.colors.background }
+        ]}
         keyboardShouldPersistTaps="handled"
       >
         <WeatherSearch
@@ -30,7 +35,11 @@ const HomeScreen: React.FC = () => {
         
         {loading && <LoadingIndicator />}
 
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {error && (
+          <Text style={[styles.errorText, { color: theme.colors.error }]}>
+            {error}
+          </Text>
+        )}
 
         {weatherData && (
           <WeatherCard
@@ -42,5 +51,17 @@ const HomeScreen: React.FC = () => {
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    padding: 16,
+  },
+  errorText: {
+    marginVertical: 16,
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
 
 export default HomeScreen;

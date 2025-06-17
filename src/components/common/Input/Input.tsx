@@ -5,8 +5,8 @@ import {
   TextStyle,
   ViewStyle,
   NativeSyntheticEvent,
-  TextInputEndEditingEventData,
   ReturnKeyTypeOptions,
+  TextInputEndEditingEventData,
 } from 'react-native';
 import styles from '../../../styles/components/Input.styles';
 import { useTheme } from '../../../context/ThemeContext';
@@ -20,6 +20,8 @@ interface InputProps {
   secureTextEntry?: boolean;
   onEndEditing?: (e: NativeSyntheticEvent<TextInputEndEditingEventData>) => void;
   returnKeyType?: ReturnKeyTypeOptions;
+  placeholderTextColor?: string; // Add this line
+  darkMode?: boolean; // Add this line
 }
 
 const Input: React.FC<InputProps> = ({

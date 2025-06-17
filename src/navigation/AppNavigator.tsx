@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, Theme } from '@react-navigation/native';
+import { useTheme } from '../context/ThemeContext';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import { darkTheme, lightTheme } from '../config/theme';
+import ThemeToggleButton from '../../src/components/common/Button/ThemeToggleButton'; // Adjust path accordingly
 import { RootStackParamList } from '../types/navigation';
-import { RootState } from '../redux/store';
-import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
-  const { darkMode } = useSelector((state: RootState) => state.appSettings);
-  const theme = darkMode ? darkTheme : lightTheme;
+  const { theme, darkMode } = useTheme();
 
-  // Create a React Navigation compatible theme object
   const navigationTheme: Theme = {
     dark: darkMode,
     colors: {
@@ -24,26 +21,15 @@ const AppNavigator = () => {
       border: theme.colors.border,
       notification: theme.colors.secondary,
     },
-    // Add default fonts if needed
     fonts: {
-      regular: {
-        fontFamily: 'System',
-        fontWeight: '400',
-      },
-      medium: {
-        fontFamily: 'System',
-        fontWeight: '500',
-      },
-      bold: {
-        fontFamily: 'System',
-        fontWeight: '700',
-      },
-      heavy: {
-        fontFamily: 'System',
-        fontWeight: '800',
-      },
+      regular: { fontFamily: 'System', fontWeight: '400' },
+      medium: { fontFamily: 'System', fontWeight: '500' },
+      bold: { fontFamily: 'System', fontWeight: '700' },
+      heavy: { fontFamily: 'System', fontWeight: '800' },
     },
   };
+
+  const renderHeaderRight = useCallback(() => <ThemeToggleButton />, []);
 
   return (
     <NavigationContainer theme={navigationTheme}>
@@ -55,6 +41,7 @@ const AppNavigator = () => {
           headerTintColor: theme.colors.primary,
           headerTitleStyle: {
             fontWeight: 'bold',
+            color: theme.colors.text,
           },
           contentStyle: {
             backgroundColor: theme.colors.background,
@@ -66,6 +53,7 @@ const AppNavigator = () => {
           component={HomeScreen}
           options={{
             title: 'Weather App',
+            headerRight: renderHeaderRight,
           }}
         />
       </Stack.Navigator>
